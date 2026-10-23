@@ -1,0 +1,189 @@
+
+.card {
+  --card-bg: #111827;
+  --card-border: #334155;
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #a78bfa;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 560px;
+  padding: 24px;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.avatar,
+.avatarFallback {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  border-radius: 50%;
+}
+
+.avatar {
+  display: block;
+  object-fit: cover;
+  background: #334155;
+}
+
+.avatarFallback {
+  display: grid;
+  place-items: center;
+  color: var(--text-primary);
+  background: #6d28d9;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.identity {
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 24px;
+}
+
+.role {
+  margin: 8px 0 0;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+.metricsSection,
+.skillsSection {
+  margin-top: 24px;
+}
+
+.sectionTitle {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px 16px;
+  margin: 0;
+}
+
+.metrics dt {
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.metrics dd {
+  margin: 0;
+  color: var(--accent);
+  font-weight: 700;
+  text-align: right;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skillItem {
+  min-width: 0;
+  max-width: 100%;
+}
+
+:global(.skill-badge) {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  max-width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: #1e293b;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+:global(.skill-badge__tier) {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+
+
+/* Exercise 1: responsive contract */
+
+.card {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.header {
+  flex-wrap: wrap;
+}
+
+.metrics,
+.skills {
+  min-width: 0;
+}
+
+.skills {
+  align-items: flex-start;
+}
+
+.skillItem {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 375px) {
+  .card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .header {
+    gap: 12px;
+  }
+
+  .avatar,
+  .avatarFallback {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+  }
+
+  .name {
+    font-size: 20px;
+  }
+
+  .role {
+    font-size: 13px;
+  }
+
+  .metrics {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 12px;
+  }
+
+  :global(.skill-badge) {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
