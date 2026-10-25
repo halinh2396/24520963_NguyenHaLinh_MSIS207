@@ -129,3 +129,55 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.toolbar p {
+  margin: 0;
+  color: var(--directory-muted);
+  font-size: 14px;
+}
+
+.resetButton,
+.deleteButton {
+  padding: 9px 12px;
+  color: var(--directory-text);
+  background: #312e81;
+  border: 1px solid var(--directory-border);
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.deleteButton {
+  margin-top: 12px;
+  background: #7f1d1d;
+}
+
+.resetButton:hover,
+.deleteButton:hover {
+  filter: brightness(1.2);
+}
+
+.resetButton:focus-visible,
+.deleteButton:focus-visible {
+  outline: 2px solid var(--directory-accent);
+  outline-offset: 3px;
+}
+
+.emptyState {
+  padding: 24px 16px;
+  color: var(--directory-muted);
+  text-align: center;
+  border: 1px dashed var(--directory-border);
+  border-radius: 12px;
+  overflow-wrap: anywhere;
+}
+

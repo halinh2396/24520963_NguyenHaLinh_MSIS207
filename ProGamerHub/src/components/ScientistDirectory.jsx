@@ -3,12 +3,14 @@ import { useId, useState } from "react";
 import { SMART_PEOPLE } from "../data/smartPeople";
 import styles from "./ScientistDirectory.module.css";
 
-export function ScientistDirectory() {
+export function ScientistDirectory({ initialData = SMART_PEOPLE }) {
   const searchId = useId();
   const iqId = useId();
   const sortId = useId();
 
-  const [people, setPeople] = useState(SMART_PEOPLE);
+  const [people, setPeople] = useState(() =>
+    initialData.map((person) => ({ ...person }))
+  );
   const [query, setQuery] = useState("");
   const [minIq, setMinIq] = useState(160);
   const [sortBy, setSortBy] = useState("iq-desc");
@@ -30,9 +32,26 @@ export function ScientistDirectory() {
 
   function handleIqChange(event) {
     const value = event.target.valueAsNumber;
-
     setMinIq(Number.isNaN(value) ? 0 : value);
   }
+
+  function handleDelete(id) {
+    setPeople((currentPeople) =>
+      currentPeople.filter((person) => person.id !== id)
+    );
+  }
+
+  function handleReset() {
+    setPeople(initialData.map((person) => ({ ...person })));
+    setQuery("");
+    setMinIq(160);
+    setSortBy("iq-desc");
+  }
+
+  const resultText =
+    visiblePeople.length === 1
+      ? "1 pioneer found"
+      : `${visiblePeople.length} pioneers found`;
 
   return (
     <section
@@ -87,15 +106,44 @@ export function ScientistDirectory() {
         </div>
       </form>
 
-      <ul className={styles.peopleList}>
-        {visiblePeople.map((person) => (
-          <li key={person.id} className={styles.personCard}>
-            <h3>{person.name}</h3>
-            <p>Age: {person.age}</p>
-            <p>IQ: {person.iq}</p>
-          </li>
-        ))}
-      </ul>
+      <div className={styles.toolbar}>
+        <p role="status" aria-live="polite" aria-atomic="true">
+          {resultText}
+        </p>
+
+        <button
+          className={styles.resetButton}
+          type="button"
+          onClick={handleReset}
+        >
+          Reset directory
+        </button>
+      </div>
+
+      {visiblePeople.length === 0 ? (
+        <p className={styles.emptyState}>
+          No pioneers match your search. Try different filters or reset the directory.
+        </p>
+      ) : (
+        <ul className={styles.peopleList}>
+          {visiblePeople.map((person) => (
+            <li key={person.id} className={styles.personCard}>
+              <h3>{person.name}</h3>
+              <p>Age: {person.age}</p>
+              <p>IQ: {person.iq}</p>
+
+              <button
+                className={styles.deleteButton}
+                type="button"
+                aria-label={`Delete ${person.name}`}
+                onClick={() => handleDelete(person.id)}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
