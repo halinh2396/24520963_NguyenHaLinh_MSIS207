@@ -2,8 +2,12 @@
 import { DeveloperCard } from "./components/DeveloperCard";
 import { ScientistDirectory } from "./components/ScientistDirectory";
 import "./App.css";
+import { useState } from "react";
+import { PubgMatchTelemetry } from "./components/PubgMatchTelemetry";
 
 export default function App() {
+  const [selectedSquadId, setSelectedSquadId] = useState("te");
+
   return (
     <main className="app-shell">
       <header className="site-header">
@@ -26,9 +30,13 @@ export default function App() {
         <ScientistDirectory />
       </section>
 
-      <footer className="site-footer">
-        <p>ProGamer Hub · Exercise 1 &amp; Exercise 2</p>
-      </footer>
+      <section className="app-section" aria-labelledby="pubg-title">
+        <h2 id="pubg-title">PUBG Live Radar</h2>
+        <PubgMatchTelemetry
+          squadId={selectedSquadId}
+          onSquadChange={setSelectedSquadId}
+        />
+      </section>
     </main>
   );
 }
