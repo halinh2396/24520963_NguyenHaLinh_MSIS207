@@ -1,0 +1,207 @@
+
+.radar {
+  --radar-bg: #101827;
+  --radar-panel: #172337;
+  --radar-border: #2d405b;
+  --radar-text: #edf4ff;
+  --radar-muted: #a9bad1;
+  --radar-accent: #55b6ff;
+  --radar-danger: #ff8b8b;
+
+  width: 100%;
+  max-width: 960px;
+  margin-inline: auto;
+  padding: 1.25rem;
+  color: var(--radar-text);
+  background: var(--radar-bg);
+  border: 1px solid var(--radar-border);
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.header {
+  margin-bottom: 1rem;
+}
+
+.header h2 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.35rem, 4vw, 2rem);
+}
+
+.header p,
+.muted {
+  color: var(--radar-muted);
+}
+
+.squadSelector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-block: 1rem;
+}
+
+.squadButton,
+.retryButton {
+  min-height: 44px;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--radar-border);
+  border-radius: 8px;
+  color: var(--radar-text);
+  background: var(--radar-panel);
+  cursor: pointer;
+  font: inherit;
+}
+
+.squadButton[aria-pressed="true"] {
+  border-color: var(--radar-accent);
+  outline: 2px solid var(--radar-accent);
+  outline-offset: 1px;
+}
+
+.squadButton:focus-visible,
+.retryButton:focus-visible {
+  outline: 3px solid var(--radar-accent);
+  outline-offset: 3px;
+}
+
+.panel {
+  min-height: 220px;
+  padding: 1rem;
+  border: 1px solid var(--radar-border);
+  border-radius: 12px;
+  background: var(--radar-panel);
+  box-sizing: border-box;
+}
+
+.skeleton {
+  height: 220px;
+  overflow: hidden;
+  border: 1px solid var(--radar-border);
+  border-radius: 12px;
+  background:
+    linear-gradient(
+      90deg,
+      #172337 25%,
+      #293c55 50%,
+      #172337 75%
+    );
+  background-size: 200% 100%;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.skeletonInner {
+  padding: 1rem;
+}
+
+.skeletonLine {
+  height: 14px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  background: rgb(255 255 255 / 12%);
+}
+
+.skeletonLine:first-child {
+  width: 55%;
+  height: 22px;
+}
+
+.skeletonLine:nth-child(2) {
+  width: 82%;
+}
+
+.skeletonLine:nth-child(3) {
+  width: 68%;
+}
+
+.skeletonLine:nth-child(4) {
+  width: 74%;
+}
+
+.error {
+  border-color: var(--radar-danger);
+}
+
+.error h3 {
+  color: var(--radar-danger);
+}
+
+.retryButton {
+  margin-top: 0.5rem;
+  border-color: var(--radar-danger);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-block: 1rem;
+}
+
+.stat {
+  min-width: 0;
+  padding: 0.85rem;
+  border: 1px solid var(--radar-border);
+  border-radius: 10px;
+}
+
+.stat dt {
+  color: var(--radar-muted);
+  font-size: 0.875rem;
+}
+
+.stat dd {
+  margin: 0.35rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+@keyframes pulse {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .radar {
+    padding: 0.75rem;
+    border-radius: 12px;
+  }
+
+  .squadSelector {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .squadButton,
+  .retryButton {
+    width: 100%;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
+
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
